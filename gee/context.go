@@ -48,11 +48,11 @@ func (c *Context) SetHeader(k, v string) {
 func (c *Context) String(code int, format string, values ...interface{}) {
 	c.SetHeader("Content-Type", "text/plain")
 	c.Status(code)
-	c.Writer.Write([]byte(fmt.Sprintf(format, values)))
+	c.Writer.Write([]byte(fmt.Sprintf(format, values...)))
 }
 
 // 构造Json响应
-func (c *Context) Json(code int, obj interface{}) {
+func (c *Context) JSON(code int, obj interface{}) {
 	c.SetHeader("Content-Type", "application/json")
 	c.Status(code)
 	encoder := json.NewEncoder(c.Writer)
